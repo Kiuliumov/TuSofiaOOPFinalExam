@@ -29,6 +29,8 @@ namespace TUSofiaFinalExam.Shapes
                     throw new ArgumentException("Color cannot be empty.");
                 
                 _color = value;
+                OnColorChanged?.Invoke(this);
+
             }
         }
 
@@ -39,7 +41,13 @@ namespace TUSofiaFinalExam.Shapes
         public event Action<Shape> OnSelected;
         public event Action<Shape> OnDeselected;
         public event Action<Shape> OnMoved;
-
+        public event Action<Shape> OnResized;
+        public event Action<Shape> OnColorChanged;
+        public event Action<Shape> OnClicked;
+        public event Action<Shape> OnDoubleClicked;
+        public event Action<Shape> OnMouseEnter;
+        public event Action<Shape> OnMouseLeave;
+        
         public Shape(Point position, Color color)
         {
             Position = position;
@@ -50,11 +58,16 @@ namespace TUSofiaFinalExam.Shapes
         public abstract void Draw(Graphics g);
         public abstract bool Contains(Point point);
         public abstract Rectangle GetBounds();
-
+        
         public virtual void Move(int dx, int dy)
         {
             Position = new Point(Position.X + dx, Position.Y + dy);
             OnMoved?.Invoke(this);
+        }
+
+        public virtual void Resize(float scale)
+        {
+            OnResized?.Invoke(this);
         }
 
         public void Select()
