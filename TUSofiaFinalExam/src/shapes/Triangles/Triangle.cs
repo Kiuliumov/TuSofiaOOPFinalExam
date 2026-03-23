@@ -17,7 +17,7 @@ namespace TUSofiaFinalExam.Shapes
         {
             return Math.Abs((VertexA.X * (VertexB.Y - VertexC.Y) +
                              VertexB.X * (VertexC.Y - VertexA.Y) +
-                             VertexC.X * (VertexA.Y - VertexB.Y)) / 2.0);
+                             VertexC.X * (VertexA.Y - VertexB.Y)) / 2.0); // Полезна формула от аналитичната геометрия
         }
 
         public override Rectangle GetBounds()
@@ -33,7 +33,7 @@ namespace TUSofiaFinalExam.Shapes
         public override bool Contains(Point point)
         {
             // Barycentric coordinates
-            float denominator = ((VertexB.Y - VertexC.Y) * (VertexA.X - VertexC.X) +
+            float denominator = ((VertexB.Y - VertexC.Y) * (VertexA.X - VertexC.X) + // https://en.wikipedia.org/wiki/Barycentric_coordinate_system
                                  (VertexC.X - VertexB.X) * (VertexA.Y - VertexC.Y));
             float alpha = ((VertexB.Y - VertexC.Y) * (point.X - VertexC.X) +
                            (VertexC.X - VertexB.X) * (point.Y - VertexC.Y)) / denominator;
