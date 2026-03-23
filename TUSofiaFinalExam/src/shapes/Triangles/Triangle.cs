@@ -1,82 +1,60 @@
 using System;
 using System.Drawing;
-using TUSofiaFinalExam.Shapes;
 
 namespace TUSofiaFinalExam.Shapes
 {
-    public class Triangle : Shape
+    public abstract class Triangle : Shape
     {
-        public int BaseLength { get; private set; }
-        public int Height { get; private set; }
+        public Point VertexA { get; protected set; }
+        public Point VertexB { get; protected set; }
+        public Point VertexC { get; protected set; }
 
-        public Triangle(Point position, Color color, int baseLength, int height)
+        protected Triangle(Point position, Color color)
             : base(position, color)
-        {
-            if (baseLength <= 0 || height <= 0)
-                throw new ArgumentException("Base and height must be positive.");
-
-            BaseLength = baseLength;
-            Height = height;
-        }
+        { }
 
         public override double GetArea()
         {
-            return 0.5 * BaseLength * Height;
+            return Math.Abs((VertexA.X * (VertexB.Y - VertexC.Y) +
+                             VertexB.X * (VertexC.Y - VertexA.Y) +
+                             VertexC.X * (VertexA.Y - VertexB.Y)) / 2.0);
         }
 
-        public override void Draw(Graphics g)
+        public override Rectangle GetBounds()
         {
-            Point[] points = new Point[]
-            {
-                Position,
-                new Point(Position.X + BaseLength, Position.Y),
-                new Point(Position.X, Position.Y + Height)
-            };
+            int minX = Math.Min(VertexA.X, Math.Min(VertexB.X, VertexC.X));
+            int minY = Math.Min(VertexA.Y, Math.Min(VertexB.Y, VertexC.Y));
+            int maxX = Math.Max(VertexA.X, Math.Max(VertexB.X, VertexC.X));
+            int maxY = Math.Max(VertexA.Y, Math.Max(VertexB.Y, VertexC.Y));
 
-            using (Brush brush = new SolidBrush(Color))
-            {
-                g.FillPolygon(brush, points);
-            }
-
-            if (IsSelected)
-            {
-                using (Pen pen = new Pen(Color.Black, 2))
-                {
-                    pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                    g.DrawPolygon(pen, points);
-                }
-            }
+            return new Rectangle(minX, minY, maxX - minX, maxY - minY);
         }
 
         public override bool Contains(Point point)
         {
-            // Using barycentric coordinates for point-in-triangle test
-            Point a = Position;
-            Point b = new Point(Position.X + BaseLength, Position.Y);
-            Point c = new Point(Position.X, Position.Y + Height);
-
-            float denominator = ((b.Y - c.Y) * (a.X - c.X) + (c.X - b.X) * (a.Y - c.Y));
-            float alpha = ((b.Y - c.Y) * (point.X - c.X) + (c.X - b.X) * (point.Y - c.Y)) / denominator;
-            float beta = ((c.Y - a.Y) * (point.X - c.X) + (a.X - c.X) * (point.Y - c.Y)) / denominator;
+            // Barycentric coordinates
+            float denominator = ((VertexB.Y - VertexC.Y) * (VertexA.X - VertexC.X) +
+                                 (VertexC.X - VertexB.X) * (VertexA.Y - VertexC.Y));
+            float alpha = ((VertexB.Y - VertexC.Y) * (point.X - VertexC.X) +
+                           (VertexC.X - VertexB.X) * (point.Y - VertexC.Y)) / denominator;
+            float beta = ((VertexC.Y - VertexA.Y) * (point.X - VertexC.X) +
+                          (VertexA.X - VertexC.X) * (point.Y - VertexC.Y)) / denominator;
             float gamma = 1.0f - alpha - beta;
 
             return alpha >= 0 && beta >= 0 && gamma >= 0;
         }
 
-        public override Rectangle GetBounds()
+        public override void Move(int dx, int dy)
         {
-            return new Rectangle(Position.X, Position.Y, BaseLength, Height);
+            VertexA = new Point(VertexA.X + dx, VertexA.Y + dy);
+            VertexB = new Point(VertexB.X + dx, VertexB.Y + dy);
+            VertexC = new Point(VertexC.X + dx, VertexC.Y + dy);
+            Position = new Point(Position.X + dx, Position.Y + dy);
+
+            OnMoved?.Invoke(this);
         }
 
-        public override void Resize(float scale)
-        {
-            if (scale <= 0)
-                throw new ArgumentException("Scale must be positive.");
-
-            BaseLength = (int)(BaseLength * scale);
-            Height = (int)(Height * scale);
-
-            OnResized?.Invoke(this);
-        }
+        public override abstract void Draw(Graphics g);
+        public override abstract void Resize(float scale);
     }
 }
