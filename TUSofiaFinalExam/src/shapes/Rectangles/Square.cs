@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace TUSofiaFinalExam.Shapes
 {
-    public class Square : Rectangle
+    public class Square : RectangleShape
     {
         public Square(Point position, Color color, int sideLength)
             : base(position, color, sideLength, sideLength)
