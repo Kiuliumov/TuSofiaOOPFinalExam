@@ -1,6 +1,9 @@
 using System.Drawing;
 
-public interface IDrawable
+namespace TUSofiaFinalExam.Interfaces
 {
-    void Draw(Graphics g);
+    public interface IDrawable
+    {
+        void Draw(Graphics g);
+    }
 }

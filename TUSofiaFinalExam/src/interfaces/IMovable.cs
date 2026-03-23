@@ -1,4 +1,8 @@
-public interface IMovable
+
+namespace TUSofiaFinalExam.Interfaces
 {
-    void Move(int dx, int dy);
+    public interface IMovable
+    {
+        void Move(int dx, int dy);
+    }
 }
