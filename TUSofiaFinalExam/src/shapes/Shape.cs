@@ -1,5 +1,7 @@
 using System;
 using System.Drawing;
+using TUSofiaFinalExam.Interfaces;
+
 namespace TUSofiaFinalExam.Shapes
 {
     public abstract class Shape : IMovable, IDrawable
