@@ -1,41 +1,34 @@
 using System;
 using System.Drawing;
-using TUSofiaFinalExam.src.interfaces;
-public abstract class Shape : IMovable, IDrawable
+namespace TUSofiaFinalExam.Shapes
 {
-    private Point _position;
-    private Color _color;
-
-    public Point Position
+    public abstract class Shape : IMovable, IDrawable
     {
-        get { return _position; }
-        set
+        private Point _position;
+        private Color _color;
+
+        public Point Position
         {
-            if (value.X < 0 || value.Y < 0)
-                throw new ArgumentException("Position cannot be negative.");
-
-            _position = value;
+            get { return _position; }
+            set { _position = value; }
         }
-    }
 
-    public Color Color
-    {
-        get { return _color; }
-        set { _color = value; }
-    }
+        public Color Color
+        {
+            get { return _color; }
+            set { _color = value; }
+        }
 
-    public Shape(Point position, Color color)
-    {
-        Position = position;
-        Color = color;
-    }
+        public bool IsSelected { get; set; }
 
-    public abstract double GetArea();
+        public abstract double GetArea();
+        public abstract void Draw(Graphics g);
+        public abstract bool Contains(Point point);
+        public abstract Rectangle GetBounds();
 
-    public abstract void Draw(Graphics g);
-
-    public virtual void Move(int dx, int dy)
-    {
-        Position = new Point(_position.X + dx, _position.Y + dy);
+        public virtual void Move(int dx, int dy)
+        {
+            Position = new Point(Position.X + dx, Position.Y + dy);
+        }
     }
 }
