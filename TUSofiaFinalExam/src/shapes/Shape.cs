@@ -43,10 +43,6 @@ namespace TUSofiaFinalExam.Shapes
         public event Action<Shape> OnMoved;
         public event Action<Shape> OnResized;
         public event Action<Shape> OnColorChanged;
-        public event Action<Shape> OnClicked;
-        public event Action<Shape> OnDoubleClicked;
-        public event Action<Shape> OnMouseEnter;
-        public event Action<Shape> OnMouseLeave;
         
         public Shape(Point position, Color color)
         {
