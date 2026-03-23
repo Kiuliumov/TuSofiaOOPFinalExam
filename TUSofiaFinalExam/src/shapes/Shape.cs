@@ -20,10 +20,16 @@ namespace TUSofiaFinalExam.Shapes
             }
         }
 
-        public Color Color
+       public Color Color
         {
             get => _color;
-            set => _color = value;
+            set
+            {
+                if (value == Color.Empty)
+                    throw new ArgumentException("Color cannot be empty.");
+                
+                _color = value;
+            }
         }
 
         public bool IsSelected { get; set; }
