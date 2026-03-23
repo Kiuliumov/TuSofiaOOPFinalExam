@@ -14,8 +14,7 @@ namespace TUSofiaFinalExam.Shapes
             get => _position;
             set
             {
-                if (value.X < 0 || value.Y < 0)
-                    throw new ArgumentException("Position cannot be negative.");
+                if (value.X < 0 || value.Y < 0) throw new ArgumentException("Position cannot be negative.");
                 _position = value;
             }
         }
@@ -25,8 +24,7 @@ namespace TUSofiaFinalExam.Shapes
             get => _color;
             set
             {
-                if (value == Color.Empty)
-                    throw new ArgumentException("Color cannot be empty.");
+                if (value == Color.Empty) throw new ArgumentException("Color cannot be empty.");
                 
                 _color = value;
                 OnColorChanged?.Invoke(this);
@@ -61,10 +59,9 @@ namespace TUSofiaFinalExam.Shapes
             OnMoved?.Invoke(this);
         }
 
-        public override void Resize(float scale)
+        public virtual void Resize(float scale)
         {
-            if (scale <= 0)
-                throw new ArgumentException("Scale must be positive.");
+            if (scale <= 0) throw new ArgumentException("Scale must be positive.");
 
             Width = (int)(Width * scale);
             Height = (int)(Height * scale);
