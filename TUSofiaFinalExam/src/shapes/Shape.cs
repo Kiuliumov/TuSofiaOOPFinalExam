@@ -65,8 +65,14 @@ namespace TUSofiaFinalExam.Shapes
             OnMoved?.Invoke(this);
         }
 
-        public virtual void Resize(float scale)
+        public override void Resize(float scale)
         {
+            if (scale <= 0)
+                throw new ArgumentException("Scale must be positive.");
+
+            Width = (int)(Width * scale);
+            Height = (int)(Height * scale);
+
             OnResized?.Invoke(this);
         }
 
