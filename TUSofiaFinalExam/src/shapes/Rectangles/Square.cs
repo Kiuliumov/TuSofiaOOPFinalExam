@@ -3,9 +3,9 @@ using System.Drawing;
 
 namespace TUSofiaFinalExam.Shapes
 {
-    public class SquareShape : RectangleShape
+    public class Square : Rectangle
     {
-        public SquareShape(Point position, Color color, int sideLength)
+        public Square(Point position, Color color, int sideLength)
             : base(position, color, sideLength, sideLength)
         {
             if (sideLength <= 0)

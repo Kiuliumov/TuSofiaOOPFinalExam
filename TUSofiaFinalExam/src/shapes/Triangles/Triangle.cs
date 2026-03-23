@@ -4,12 +4,12 @@ using TUSofiaFinalExam.Shapes;
 
 namespace TUSofiaFinalExam.Shapes
 {
-    public class TriangleShape : Shape
+    public class Triangle : Shape
     {
         public int BaseLength { get; private set; }
         public int Height { get; private set; }
 
-        public TriangleShape(Point position, Color color, int baseLength, int height)
+        public Triangle(Point position, Color color, int baseLength, int height)
             : base(position, color)
         {
             if (baseLength <= 0 || height <= 0)

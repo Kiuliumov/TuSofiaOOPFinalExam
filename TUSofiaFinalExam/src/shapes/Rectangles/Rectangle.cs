@@ -4,12 +4,12 @@ using TUSofiaFinalExam.Shapes;
 
 namespace TUSofiaFinalExam.Shapes
 {
-    public class RectangleShape : Shape
+    public class Rectangle: Shape
     {
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        public RectangleShape(Point position, Color color, int width, int height)
+        public Rectangle(Point position, Color color, int width, int height)
             : base(position, color)
         {
             if (width <= 0 || height <= 0)
