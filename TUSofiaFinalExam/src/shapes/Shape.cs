@@ -82,5 +82,14 @@ namespace TUSofiaFinalExam.Shapes
             IsSelected = false;
             OnDeselected?.Invoke(this);
         }
+
+
+        public virtual bool Intersect(Shape shape)
+            {
+                return this.Position.X < shape.Position.X + shape.Width &&
+                    this.Position.X + this.Width > shape.Position.X &&
+                    this.Position.Y < shape.Position.Y + shape.Height &&
+                    this.Position.Y + this.Height > shape.Position.Y;
+            }
     }
 }
