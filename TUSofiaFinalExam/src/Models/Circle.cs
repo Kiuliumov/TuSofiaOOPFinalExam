@@ -1,8 +1,7 @@
 using System;
 using System.Drawing;
-using TUSofiaFinalExam.Shapes;
 
-namespace TUSofiaFinalExam.Shapes
+namespace TUSofiaFinalExam.Models
 {
     public class Circle: Shape
     {

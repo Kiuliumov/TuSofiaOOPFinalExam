@@ -1,5 +1,5 @@
 
-namespace TUSofiaFinalExam.Interfaces
+namespace TUSofiaFinalExam.Contracts
 {
     public interface IMovable
     {

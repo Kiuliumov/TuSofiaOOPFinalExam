@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-namespace TUSofiaFinalExam.Shapes
+namespace TUSofiaFinalExam.Models
 {
     public class Ellipse : Shape
     {

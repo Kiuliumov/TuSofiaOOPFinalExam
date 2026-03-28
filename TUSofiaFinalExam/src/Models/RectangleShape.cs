@@ -1,8 +1,8 @@
 using System;
 using System.Drawing;
-using TUSofiaFinalExam.Shapes;
+using TUSofiaFinalExam.Models;
 
-namespace TUSofiaFinalExam.Shapes
+namespace TUSofiaFinalExam.Models
 {
     public class RectangleShape: Shape
     {

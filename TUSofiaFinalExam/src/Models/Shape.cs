@@ -1,8 +1,9 @@
 using System;
 using System.Drawing;
-using TUSofiaFinalExam.Interfaces;
+using TUSofiaFinalExam.Contracts;
+using TUSofiaFinalExam.Models;
 
-namespace TUSofiaFinalExam.Shapes
+namespace TUSofiaFinalExam.Models
 {
     public abstract class Shape : IMovable, IDrawable
     {
@@ -33,8 +34,6 @@ namespace TUSofiaFinalExam.Shapes
         }
 
         public bool IsSelected { get; set; }
-
-        public virtual Point Center => Position;
 
         public event Action<Shape> OnSelected;
         public event Action<Shape> OnDeselected;

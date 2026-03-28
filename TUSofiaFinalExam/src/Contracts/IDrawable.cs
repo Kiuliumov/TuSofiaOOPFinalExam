@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace TUSofiaFinalExam.Interfaces
+namespace TUSofiaFinalExam.Contracts
 {
     public interface IDrawable
     {
